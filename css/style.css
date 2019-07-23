@@ -17,6 +17,7 @@
     right: 0;
     font-size: 0.8em;
     color: #27ae60;
+    padding-right: 5px;
 }
 .job-title {
     font-weight: bold;
@@ -34,4 +35,9 @@
 
 ul.list-description li {
     font-size: 0.8em;
+}
+
+.project-title {
+    font-size: 1.3em;
+    font-weight: bold;
 }
