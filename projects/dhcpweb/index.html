@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    
+    <title>SupCorp Tool</title>
+    <link rel="icon" href="/projects/dhcpweb/imgs/favicon.png">
+
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
+            <div class="container">
+                <a href="#" class="navbar-brand text-white">
+                    <img src="/projects/dhcpweb/imgs/uolcorp.png" width="150">
+                </a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+                    <i class="fas fa-bars text-white"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="nav-principal">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-white">DHCP - Padrão</a>
+                        </li>
+                        <li class="nav-item divisor"></li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-white">DHCP - Pesquisa Avançada</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex justify-content-center display-2 m-2" id="Capa">
+        <h1 class="display-4 text-center">Gerenciador DHCP UOL</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p>Gerenciador para consultas, criação e remoção das reservas de IP</p>
+    </div>
+    <section id="inputs" class="d-flex mb-2">
+        <div class="container">
+            <div class="form-row mb-2">
+                <div class="col-md-6">
+                    <label for="description">Nome</label>
+                    <input type="text" class="form-control" placeholder="Nome do Profissional" id="description"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="hostname">Hostname</label>
+                    <input type="text" class="form-control" placeholder="Hostname" id="hostname" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="field">Local</label>
+                        <select class="form-control" id="field" onchange="changeIP()">
+                            <option value="FL">Faria Lima</option>
+                            <option value="BL5">Barão de Limeira 425</option>
+                            <option value="BL8">Barão de Limeira 458</option>
+                            <option value="ARARAQUARA">Araraquara</option>
+                            <option value="PG">Pedra Grande</option>
+                            <option value="GLETE">Glete</option>
+                            <option value="TAMBORE">Tamboré</option>
+                            <option value="MARINGA">Maringá</option>
+                            <option value="POA">Poá</option>
+                            <option value="UBERLANDIA">Uberlandia</option>
+                            <option value="EDTECH">EdTech</option>
+                            <option value="ANGELICA">Angélica</option>
+                            <option value="CURITIBA">Curitiba</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="BH">Belo Horizonte</option>
+                            <option value="BRASILIA">Brasília</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inicioIP">IP</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inicioIP">172.22</span>
+                            </div>
+                            <input type="text" class="form-control" id="ip1" placeholder="0" required>
+                            <input type="text" class="form-control" id="ip2" placeholder="0" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-dark" onclick="searchByIP()" id="searchip">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mac">MAC Address</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="mac" placeholder="00:00:00:00:00:00" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-dark" onclick="searchByMac()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="limpar">Criar reserva</label>
+                        <div class="inut-group">
+                            <button class="btn btn-outline-success btn-block" type="submit" id="limpar"
+                                onclick="createReservation()">
+                                <i class="fas fa-plus-square"></i> Criar reserva
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-outline-primary btn-block" onclick="clearAll()">
+                    <i class="fas fa-broom"></i> Limpar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section id="dados" class="container mb-5">
+
+    </section>
+
+    <footer class="bg-white fixed-bottom" style="border-top: 1px solid #ced4da">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center mt-1">2019 &copy; Desenvolvido por <a
+                            href="https://macielbrendoo.github.io/">Brendo Maciel</a> - Suporte Corporativo
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="modalalert" tabindex="-1" role="dialog" aria-labelledby="modalalert" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modaltitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalmsg">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Question Modal -->
+    <div class="modal fade" id="questionmodal" tabindex="-1" role="dialog" aria-labelledby="questionmodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalTitle">Excluir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="deleteModalMsg">
+                    Tem certeza que deseja excluir a reserva?
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingmodal" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div clas="loader-txt">
+                        <div class="spinner-border"></div>
+                        <br>
+                        <p>Carregando... <br><br><small>Por favor aguarde...</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script personalizado -->
+    <script type="text/javascript" th:src="@{/scripts/script.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/masks.js}"></script>
+    <!-- iMaskjs -->
+    <script src="https://unpkg.com/imask"></script>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
