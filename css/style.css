@@ -1,0 +1,37 @@
+#profile {
+    background-color: #28a745;
+}
+#profile-photo {
+    border-radius: 100%;
+    border: 3px solid #fff;
+    max-width: 150px;
+}
+
+
+.mouse-hover:hover {
+    cursor: default;
+}
+
+.time {
+    position: absolute;
+    right: 0;
+    font-size: 0.8em;
+    color: #27ae60;
+}
+.job-title {
+    font-weight: bold;
+}
+
+.company {
+    font-size: 0.8em;
+    color: #28a745;
+}
+
+.company:hover {
+    text-decoration: none;
+    color: #28a745;
+}
+
+ul.list-description li {
+    font-size: 0.8em;
+}
